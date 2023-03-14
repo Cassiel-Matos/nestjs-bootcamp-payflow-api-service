@@ -71,6 +71,16 @@ export class FlowService {
     return create_ticket;
   }
 
+  //Trás boleto (Bring ticket)
+  async ticket(id: string): Promise<Ticket> {
+    const ticket = await this.prisma.ticket.findFirst({
+      where: {
+        id: id,
+      },
+    });
+    return ticket;
+  }
+
   //Trás a lista de boletos criados pelo usuario (Bring the list of tickets created by the user)
   async list_ticket(user: string): Promise<Ticket[]> {
     const list_ticket = await this.prisma.ticket.findMany({

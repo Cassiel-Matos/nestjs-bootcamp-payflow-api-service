@@ -7,9 +7,11 @@ import {
   Delete,
   Put,
 } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 import { User, Ticket } from '@prisma/client';
 import { FlowService } from 'src/services/flow.service';
 
+@ApiTags('payflow')
 @Controller('v1')
 export class FlowController {
   constructor(private readonly flowService: FlowService) {}
@@ -34,9 +36,15 @@ export class FlowController {
   }
 
   //Cria lista de boletos (Create tickets list)
-  @Post('ticket')
+  @Post('create_ticket')
   async create_ticket(@Body() body: Ticket) {
     return this.flowService.create_ticket(body);
+  }
+
+  //Trás o boleto  (Bring ticket)
+  @Get('ticket/:id')
+  async ticket(@Param('id') id: string): Promise<Ticket> {
+    return this.flowService.ticket(id);
   }
 
   //Trás a lista de boletos criados pelo usuario (Bring the list of tickets created by the user)
