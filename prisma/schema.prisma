@@ -26,11 +26,10 @@ model Ticket {
   name      String
   validity  DateTime
   value     Float
-  code      String?
   payed     Boolean?
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
   deletedAt DateTime?
-  user      User?      @relation(fields: [userId], references: [id], onUpdate: Cascade, onDelete: Cascade)
-  userId    String?
+  email      User?      @relation(fields: [Email], references: [email], onUpdate: Cascade, onDelete: Cascade)
+  Email    String?
 }

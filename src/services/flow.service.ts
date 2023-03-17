@@ -8,13 +8,13 @@ export class FlowService {
 
   //Trás todas as informações do usuario (brings the user information)
   async about(email: string): Promise<User> {
-    const about = await this.prisma.user.findFirst({
+    const abouts = await this.prisma.user.findFirst({
       where: {
-        email,
+        email: email,
       },
     });
 
-    return about;
+    return abouts;
   }
 
   //Deleta conta de usuario (Delete account user)
@@ -35,7 +35,7 @@ export class FlowService {
 
     const findUser = await this.prisma.user.findFirst({
       where: {
-        id: body.id,
+        email: body.email,
       },
     });
 
@@ -46,10 +46,9 @@ export class FlowService {
 
     const create_user = await this.prisma.user.create({
       data: {
-        id: body.id,
-        name: body.given_name,
+        name: body.name,
         email: body.email,
-        picture: body.picture,
+        picture: body.image,
       },
     });
 
@@ -82,20 +81,20 @@ export class FlowService {
   }
 
   //Trás a lista de boletos criados pelo usuario (Bring the list of tickets created by the user)
-  async list_ticket(user: string): Promise<Ticket[]> {
+  async list_ticket(email: string): Promise<Ticket[]> {
     const list_ticket = await this.prisma.ticket.findMany({
       where: {
-        userId: user,
+        Email: email,
       },
     });
     return list_ticket;
   }
 
   //Trás a lista de boletos pagos pelo usuario (Bring the list of tickets payed by the user)
-  async list_payed(user: string): Promise<Ticket[]> {
+  async list_payed(email: string): Promise<Ticket[]> {
     const list_payed = await this.prisma.ticket.findMany({
       where: {
-        userId: user,
+        Email: email,
         AND: {
           payed: true,
         },
@@ -105,10 +104,10 @@ export class FlowService {
   }
 
   //Trás a lista de boletos não pagos pelo usuario (Bring the list of tickets not payed by the user)
-  async list_nopayed(user: string): Promise<Ticket[]> {
+  async list_nopayed(email: string): Promise<Ticket[]> {
     const list_nopayed = await this.prisma.ticket.findMany({
       where: {
-        userId: user,
+        Email: email,
         AND: {
           payed: false,
         },

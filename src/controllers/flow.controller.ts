@@ -17,9 +17,9 @@ export class FlowController {
   constructor(private readonly flowService: FlowService) {}
 
   //Trás todas as informações do usuario (brings the user information)
-  @Get('about/:about')
-  async about(@Param('id') id: string): Promise<User | null> {
-    return this.flowService.about(id);
+  @Get('about/:email')
+  async about(@Param('email') email: string): Promise<User> {
+    return this.flowService.about(email);
   }
 
   //Delete a conta do usuario (Delete user account)
@@ -48,21 +48,21 @@ export class FlowController {
   }
 
   //Trás a lista de boletos criados pelo usuario (Bring the list of tickets created by the user)
-  @Get('list_ticket/:user')
-  async list_ticket(@Param('user') user: string): Promise<Ticket[]> {
-    return this.flowService.list_ticket(user);
+  @Get('list_ticket/:email')
+  async list_ticket(@Param('email') email: string): Promise<Ticket[]> {
+    return this.flowService.list_ticket(email);
   }
 
   //Trás a lista de boletos pagos pelo usuario (Bring the list of tickets payed by the user)
-  @Get('list_payed/:user')
-  async list_payed(@Param('user') user: string): Promise<Ticket[]> {
-    return this.flowService.list_payed(user);
+  @Get('list_payed/:email')
+  async list_payed(@Param('email') email: string): Promise<Ticket[]> {
+    return this.flowService.list_payed(email);
   }
 
   //Trás a lista de boletos não pagos pelo usuario (Bring the list of tickets not payed by the user)
-  @Get('list_nopayed/:user')
-  async list_nopayed(@Param('user') user: string): Promise<Ticket[]> {
-    return this.flowService.list_nopayed(user);
+  @Get('list_nopayed/:email')
+  async list_nopayed(@Param('email') email: string): Promise<Ticket[]> {
+    return this.flowService.list_nopayed(email);
   }
 
   //Atualiza boleto (update tickets)
