@@ -49,20 +49,20 @@ export class FlowController {
 
   //Trás a lista de boletos criados pelo usuario (Bring the list of tickets created by the user)
   @Get('list_ticket/:email')
-  async list_ticket(@Param('email') email: string): Promise<Ticket[]> {
-    return this.flowService.list_ticket(email);
+  async list_ticket(@Param('email') emails: string): Promise<Ticket[]> {
+    return this.flowService.list_ticket(emails);
   }
 
   //Trás a lista de boletos pagos pelo usuario (Bring the list of tickets payed by the user)
   @Get('list_payed/:email')
-  async list_payed(@Param('email') email: string): Promise<Ticket[]> {
-    return this.flowService.list_payed(email);
+  async list_payed(@Param('email') emails: string): Promise<Ticket[]> {
+    return this.flowService.list_payed(emails);
   }
 
   //Trás a lista de boletos não pagos pelo usuario (Bring the list of tickets not payed by the user)
   @Get('list_nopayed/:email')
-  async list_nopayed(@Param('email') email: string): Promise<Ticket[]> {
-    return this.flowService.list_nopayed(email);
+  async list_nopayed(@Param('email') emails: string): Promise<Ticket[]> {
+    return this.flowService.list_nopayed(emails);
   }
 
   //Atualiza boleto (update tickets)

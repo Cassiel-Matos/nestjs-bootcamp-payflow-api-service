@@ -64,6 +64,8 @@ export class FlowService {
 
   //Criar Boleto (Create ticket )
   async create_ticket(body: Ticket): Promise<Ticket> {
+    console.log(body);
+
     const create_ticket = await this.prisma.ticket.create({
       data: body,
     });
@@ -81,20 +83,20 @@ export class FlowService {
   }
 
   //Trás a lista de boletos criados pelo usuario (Bring the list of tickets created by the user)
-  async list_ticket(email: string): Promise<Ticket[]> {
+  async list_ticket(emails: string): Promise<Ticket[]> {
     const list_ticket = await this.prisma.ticket.findMany({
       where: {
-        Email: email,
+        email: emails,
       },
     });
     return list_ticket;
   }
 
   //Trás a lista de boletos pagos pelo usuario (Bring the list of tickets payed by the user)
-  async list_payed(email: string): Promise<Ticket[]> {
+  async list_payed(emails: string): Promise<Ticket[]> {
     const list_payed = await this.prisma.ticket.findMany({
       where: {
-        Email: email,
+        email: emails,
         AND: {
           payed: true,
         },
@@ -104,10 +106,10 @@ export class FlowService {
   }
 
   //Trás a lista de boletos não pagos pelo usuario (Bring the list of tickets not payed by the user)
-  async list_nopayed(email: string): Promise<Ticket[]> {
+  async list_nopayed(emails: string): Promise<Ticket[]> {
     const list_nopayed = await this.prisma.ticket.findMany({
       where: {
-        Email: email,
+        email: emails,
         AND: {
           payed: false,
         },
